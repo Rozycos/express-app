@@ -25,8 +25,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(compression());
 // Set limits for different routes - you must install 'express-rate-limit' (npm install express-rate-limit)
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 min
-  max: 300 // maximum number of requests for one IP address in a time
+  windowMs: 10 * 60 * 1000, // 15 min
+  max: 30 // maximum number of requests for one IP address in a time
 });
 // Apply limits to all routes
 app.use(limiter);
