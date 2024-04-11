@@ -7,6 +7,7 @@ const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 
 const indexRouter = require('./routes/index');
+const adminRouter = require('./routes/admin');
 //const usersRouter = require('./routes/users');
 
 const app = express();
@@ -20,6 +21,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public', 'builds', 'main')));
+app.use(express.static(path.join(__dirname, 'public', 'builds', 'admin')));
 
 // gzip compression for static files
 app.use(compression());
@@ -32,6 +35,7 @@ const limiter = rateLimit({
 app.use(limiter);
 
 app.use('/', indexRouter);
+app.use('/admin', adminRouter);
 //app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
